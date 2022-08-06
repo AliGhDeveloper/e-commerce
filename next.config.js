@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   env: {
-    BASE_URL: 'https://e-commerce-project-alighdeveloper.vercel.app/'
+    BASE_URL: 'https://e-commerce-project-alighdeveloper.vercel.app/api'
   }
 }
 
