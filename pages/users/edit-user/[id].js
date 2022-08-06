@@ -14,7 +14,6 @@ export default function EditUser() {
     const [ user, setUser ] = useState({})
     const [ isAdmin, setIsAdmin ] = useState( null )
     
-    if( !auth || auth.user && auth.user.role !== 'admin') return null
     
     useEffect(() => {
         if(users) { 
@@ -23,7 +22,7 @@ export default function EditUser() {
         }
         
     }, [users])
-
+    
     useEffect(() => {
         if(user) { 
             setIsAdmin(user.role === 'admin' ? true : false)
@@ -31,6 +30,7 @@ export default function EditUser() {
         
     }, [user])
     
+    if( !auth || auth.user && auth.user.role !== 'admin') return null
     
     const handleCheck = (e) => {
         if( auth.user.role === 'admin' &&  !auth.user.root ){

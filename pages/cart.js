@@ -47,7 +47,7 @@ export default function Cart(){
             }
             updateCart()
         }
-    }, [callback])
+    }, [callback, dispatch])
 
 
     //messuaring total price
@@ -122,8 +122,8 @@ export default function Cart(){
                     <table>
                         <tbody>
                             {
-                                cart.map( item => (
-                                    <CartItem item={item} />
+                                cart.map( (item,index) => (
+                                    <CartItem key={index} item={item} />
                                 ))
                             }
                         </tbody>

@@ -25,32 +25,32 @@ const CreateProduct = () => {
     const dispatch = useDispatch();
 
     
-    //checking authentication
-    if(!auth || auth.user && auth.user.role !== 'admin' ) return null
     
-
+    
     //getting product data if its updating a product
     useEffect(() => {
         if(id) {
             getData(`/products/${id}`)
-                .then(response => response.json())
-                .then(result => {
-                    if(result.error) return dispatch( {type: 'NOTIFY', payload: result });
-                    select.current.value = result.category
-                    setProductData( result )
-                    setImages( result.images )
-                })
+            .then(response => response.json())
+            .then(result => {
+                if(result.error) return dispatch( {type: 'NOTIFY', payload: result });
+                select.current.value = result.category
+                setProductData( result )
+                setImages( result.images )
+            })
         }
-    }, [id])
-
-
+    }, [id, dispatch])
+    
+    //checking authentication
+    if(!auth || auth.user && auth.user.role !== 'admin' ) return null
+    
     const handleInpChange = (e) => {
         const { name , value } = e.target;
-
+        
         setProductData({ ...productData, [name] : value})
     }
-
-
+    
+    
     //giving images and saving them in (images) state variable
     const handleImageUpload = (obj) => {
         let newImages = [];

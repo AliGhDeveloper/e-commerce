@@ -96,19 +96,19 @@ export default function Profile( ) {
                                     <tbody>
                                         {
                                             orders.map( order => (
-                                                <tr>
+                                                <tr key={order._id}>
                                                     <td className="p-2"><Link href={`http://localhost:3000/profile/orders/${order._id}`} >{order._id}</Link></td>
                                                     <td className="p-2">{new Date(order.createdAt).toLocaleDateString()}</td>
                                                     <td className="p-2">
                                                         { order.delivered ? 
                                                             <li className="fas fa-check text-success"></li>:
-                                                            <i class="fas fa-times text-danger"></i>
+                                                            <i className="fas fa-times text-danger"></i>
                                                         }
                                                     </td>
                                                     <td className="p-2">
                                                         { order.paid ? 
                                                             <li className="fas fa-check text-success"></li>:
-                                                            <i class="fas fa-times text-danger"></i>
+                                                            <i className="fas fa-times text-danger"></i>
                                                         }
                                                     </td>
                                                 </tr>

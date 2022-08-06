@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { val } from '../utils/val';
+import { val } from 'utils/val';
 import { postData } from "utils/fetchData";
 
 export default function Register(){
@@ -44,7 +44,7 @@ export default function Register(){
         const ErrorMessage = val(email, password, cf_password)
         if(ErrorMessage) return dispatch( { type: "NOTIFY" , payload : { error : ErrorMessage}})
         dispatch({ type : 'NOTIFY', payload : { loading : "please wait.."} });
-        const res = await postData('http://localhost:3000/api/register', userData);
+        const res = await postData('/api/register', userData);
         const data = await res.json();
         return dispatch( { type : 'NOTIFY', payload : data })
     }   
@@ -54,7 +54,7 @@ export default function Register(){
                 <div className="form-group my-3">
                     <label htmlFor="emailInp">Email address</label>
                     <input type="text" name="email" className="form-control" id="emailInp" aria-describedby="emailHelp" placeholder="Enter email" onChange={inputChangeHandle}/>
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="passwordInp">Password</label>

@@ -71,7 +71,7 @@ export default function SignIn(){
                 <div className="form-group my-3">
                     <label htmlFor="emailInp">Email address</label>
                     <input name="email" type="text" className="form-control" id="emailInp" aria-describedby="emailHelp" placeholder="Enter email" onChange={inputChangeHandle}/>
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" className="form-text text-muted">We&apos;ll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="passwordInp">Password</label>
