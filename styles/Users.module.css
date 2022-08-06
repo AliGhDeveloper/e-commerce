@@ -1,0 +1,6 @@
+.users_table td,
+.users_table th { 
+    padding: 5px;
+    text-align: center
+}
+

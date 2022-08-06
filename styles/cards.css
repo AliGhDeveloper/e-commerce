@@ -1,0 +1,16 @@
+.products_list .card {
+    margin : 20px auto;
+    overflow: hidden;
+}
+
+.card .card-img-top {
+    width: 100%;
+    height: 300px;
+}
+
+.products_list { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 70px;
+    margin : 10px 0;
+}

@@ -1,0 +1,43 @@
+.avatar {
+    width: 150px;
+    height: 150px;
+    border: 1px solid whitesmoke;
+    border-radius : 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.avatar .profileImage {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
+
+.up_file {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    left: 25px;
+    bottom: 20px;
+}
+
+.avatar .imageSpan {
+    position: absolute;
+    left: 25px;
+    bottom: -100px;
+    transition: ease-in 0.2s;
+}
+
+.avatar:hover .imageSpan {
+    position: absolute;
+    left: 25px;
+    bottom: 20px;
+    transition: ease-in 0.2s;
+}
+
+.avatar .cameraicon {
+    cursor : pointer
+}
+

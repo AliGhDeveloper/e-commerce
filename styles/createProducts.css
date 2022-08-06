@@ -1,0 +1,33 @@
+
+.up_images .img  {
+    display: inline;
+    position: relative;
+}
+
+.up_images .img span{
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    background-color : crimson;
+    color: white ;
+    padding: 0 4px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.up_images .img img{
+    width: 24%;
+    height: 80px;
+    object-fit: cover;
+}
+
+.up_images .img:nth-of-type(1) img {
+    width: 100%;
+    min-height: 350px ;
+    max-height: 400px;
+    object-fit : cover
+}
+
+
+
