@@ -3,13 +3,16 @@ import bcrypt from 'bcrypt';
 import { loginVal } from 'utils/val';
 import { Db_connect } from 'utils/Db_connection';
 import { accessToken, refreshToken } from 'utils/tokenGenerate';
+import cors from 'middlewares/cors';
 
 Db_connect();
 
 export default function handler( req, res ) {
     switch( req.method ) {
         case 'POST' : 
-            signIn(req,res)
+           return signIn(req,res)
+        case 'OPTIONS':
+            return cors(req,res)
     }
 }
 
