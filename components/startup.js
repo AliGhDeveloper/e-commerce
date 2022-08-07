@@ -18,7 +18,7 @@ export default function StartUp( { children } ){
                     })
                 
                 }
-                getData('/categories')
+                getData('api/categories')
                     .then(response => response.json())
                     .then( result => {
                         if(!result.error) return dispatch( { type: 'ADD_CAT', payload: result })
