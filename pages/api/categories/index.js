@@ -32,6 +32,6 @@ async function createCat(req, res) {
 
 async function getCats(req, res) {
     const cats = await Categories.find();
-    cors(req, res)
+    res.setHeader('Access_Control_Origin', '*')
     res.status(200).json(cats)
 }
