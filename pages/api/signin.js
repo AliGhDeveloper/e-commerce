@@ -34,7 +34,11 @@ async function signIn(req, res){
     // generating token
     const refresh_token = refreshToken(user);
     const access_token = accessToken(user);
-
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,authorization'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     return res.status(200).json(
         {
             success : "logged in",

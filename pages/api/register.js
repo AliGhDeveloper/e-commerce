@@ -2,13 +2,16 @@ import { Db_connect } from "utils/Db_connection"
 import Users from '../../models/UsersModel';
 import {val} from '../../utils/val';
 import bcrypt from 'bcrypt';
+import cors from 'middlewares/cors';
 
 Db_connect()
 
 export default function handler( req, res) {
     switch(req.method){
         case 'POST': 
-            register(req, res)
+            return register(req, res)
+        case 'OPTIONS': 
+            return cors(req,res)
     }
 };
 
