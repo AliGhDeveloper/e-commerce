@@ -1,7 +1,7 @@
 import Categories from 'models/CategoriesModel';
 import { Db_connect } from 'utils/Db_connection';
 import auth from 'middlewares/auth';
-
+import cors from 'middlewares/cors';
 
 Db_connect();
 
@@ -32,6 +32,6 @@ async function createCat(req, res) {
 
 async function getCats(req, res) {
     const cats = await Categories.find();
-
+    cors(req, res)
     res.status(200).json(cats)
 }
