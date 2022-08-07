@@ -1,5 +1,6 @@
 export const postData = async (url, post, token) => {
     const response = await fetch(process.env.BASE_URL + url, {
+        mode: 'no-cors',
         method: 'POST',
         headers : {
             'Content-Type' : 'application/json',
@@ -14,6 +15,7 @@ export const postData = async (url, post, token) => {
 export const getData = async (url, token) => {
     try {
         const response = await fetch(process.env.BASE_URL + url, {
+            mode: 'no-cors',
             headers : {
                 'authorization' : token
             }
@@ -27,6 +29,7 @@ export const getData = async (url, token) => {
 
 export const patchData = async (url, post, token) => {
     const response = await fetch(process.env.BASE_URL + url, {
+        mode: 'no-cors',
         method: 'PATCH',
         headers : {
             'Content-Type' : 'application/json',
@@ -40,6 +43,7 @@ export const patchData = async (url, post, token) => {
 
 export const deleteData = async (url, data, token) => {
     const response = await fetch(process.env.BASE_URL + url, {
+        mode: 'no-cors',
         method: "DELETE",
         headers : {
             'Content-Type' : 'application/json',
@@ -53,6 +57,7 @@ export const deleteData = async (url, data, token) => {
 
 export const putData = async (url, data, token) => {
     const response = await fetch(process.env.BASE_URL + url, {
+        mode: 'no-cors',
         method: 'PUT',
         headers : {
             'Content-Type' : 'application/json',
