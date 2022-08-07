@@ -11,6 +11,8 @@ export default function handler(req, res){
             return getCats(req, res);
         case 'POST':
             return createCat(req, res);
+        case 'OPTIONS': 
+            return res.status(200).send('ok')
     }
 };
 
