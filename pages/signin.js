@@ -49,7 +49,7 @@ export default function SignIn(){
         if(errorMessage) return dispatch({type : 'NOTIFY', payload : { error: errorMessage}})
         dispatch( { type: 'NOTIFY', payload: { loading : 'wait..'}});
 
-        const res = await postData('api/signin', userData)
+        const res = await postData('/signin', userData)
         const data = await res.json();
         console.log(data.refresh_token)
         if(data.success){
