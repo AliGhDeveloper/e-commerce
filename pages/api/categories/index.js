@@ -1,7 +1,6 @@
 import Categories from 'models/CategoriesModel';
 import { Db_connect } from 'utils/Db_connection';
 import auth from 'middlewares/auth';
-import cors from 'middlewares/cors';
 
 Db_connect();
 
@@ -11,6 +10,8 @@ export default function handler(req, res){
             return getCats(req, res);
         case 'POST':
             return createCat(req, res);
+        case 'OPTIONS': 
+            return cors(req, res);
     }
 };
 
@@ -34,4 +35,12 @@ async function getCats(req, res) {
     const cats = await Categories.find();
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.status(200).json(cats)
+};
+
+function cors(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,authorization'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.status(200).json({})
 }
