@@ -10,9 +10,6 @@ export default function handler(req, res){
             return getCats(req, res);
         case 'POST':
             return createCat(req, res);
-        case 'OPTIONS': 
-            cors(req,res) 
-            return res.status(200).json({})
     }
 };
 

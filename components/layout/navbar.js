@@ -61,7 +61,7 @@ function Navbar(){
                         <Link href="/"><a className={ `${styles.navlink} nav-link` + isActive('/')} aria-current="page" href="#">Home</a></Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/cart"><a className={`${styles.navlink} nav-link` + isActive('/cart')} ><i className="fas fa-shopping-cart position-relative" aria-hidden="true"><span style={{backgroundColor: "red", padding: '2px 5px', borderRadius: '50%', left: '12px', top: '-17px'}} className="text-white position-absolute">{cart.length}</span></i>Cart</a></Link>
+                        <Link href="/cart"><a className={`${styles.navlink} nav-link` + isActive('/cart')} ><i className="far fa-shopping-cart position-relative" aria-hidden="true"><span style={{backgroundColor: "red", padding: '2px 5px', borderRadius: '50%', left: '12px', top: '-17px'}} className="text-white position-absolute">{cart.length}</span></i>Cart</a></Link>
                     </li>
                     {
                         Object.keys(auth).length === 0 ?

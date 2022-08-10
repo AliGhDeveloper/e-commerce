@@ -10,19 +10,19 @@ export default function StartUp( { children } ){
     useEffect(() => {
         const firstLogin = localStorage.getItem('firstlogin');
         if(firstLogin) {
-                getData('/auth/accessToken')
-                    .then(response => response.json())
-                    .then(result => {
-                        if(result.error) return dispatch({ type : 'NOTIFY', payload : result})
-                        dispatch({ type: 'AUTH', payload: result})
-                    })
+            getData('/auth/accessToken')
+                .then(response => response.json())
+                .then(result => {
+                    if(result.error) return dispatch({ type : 'NOTIFY', payload : result})
+                    dispatch({ type: 'AUTH', payload: result})
+                })
                 
-                }
-                getData('/categories')
-                    .then(response => response.json())
-                    .then( result => {
-                        if(!result.error) return dispatch( { type: 'ADD_CAT', payload: result })
-                    })
+        }
+        getData('/categories')
+            .then(response => response.json())
+            .then( result => {
+                if(!result.error) return dispatch( { type: 'ADD_CAT', payload: result })
+        })
                 
     }, []);
 
