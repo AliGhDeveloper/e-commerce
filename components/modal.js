@@ -21,7 +21,7 @@ export default function Modal () {
             
             } else if( actionType === 'ADD_CART'){ 
                 
-                dispatch(deleteItem(modal.item._id, cart));
+                dispatch(deleteItem(modal.item._id, cart, actionType));
             
             } else if( actionType === 'ADD_CAT' ){
                 

@@ -33,7 +33,6 @@ export const decreaseItem = (cart, id) => {
 
 export const deleteItem = (itemId, array, type) => {
     let newArr = [...array];
-    console.log(Array.isArray(itemId))
     if(Array.isArray(itemId)) {
         itemId.forEach( id => {
             newArr = newArr.filter(item => item._id !== id )
