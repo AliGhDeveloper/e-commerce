@@ -42,7 +42,11 @@ const Users = () => {
                                     <td>
                                         {
                                             user.role === 'admin' ? user.root?  
-                                            <li className="fas fa-check text-success">Root</li>:
+                                            <>
+                                                <li className="fas fa-check text-success"></li>
+                                                <span className="text-success">Root</span>
+                                            </>
+                                            :
                                             <li className="fas fa-check text-success"></li>:
                                             <i className="fas fa-times text-danger"></i>
                                         }
