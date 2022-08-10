@@ -22,7 +22,7 @@ export default function CartItem({ item }) {
                     <button onClick={() => dispatch(increaseItem(cart, item._id))}className="btn btn-outlined" disabled={ item.quantity === item.inStock ? true : false}> + </button>
                 </td>
                 <td>
-                    <i  data-toggle="modal" data-target="#exampleModal" onClick={ () => dispatch({ type: 'MODAL', payload: {item: item, type: 'delete' }})} className="btn btn-danger fas fa-trash-alt"></i>
+                    <i  data-toggle="modal" data-target="#exampleModal" onClick={ () => dispatch({ type: 'MODAL', payload: {state: cart, item: item, actionType: 'ADD_CART' }})} className="text-danger fas fa-trash-alt"></i>
                 </td>
             </tr>
         </>

@@ -19,7 +19,7 @@ export default function Modal () {
                     .then( result => console.log(result))
                 dispatch(deleteItem(modal.item._id, users, 'ADD_USERS'));
             
-            } else if( actionType === 'deleteCartItem'){ 
+            } else if( actionType === 'ADD_CART'){ 
                 
                 dispatch(deleteItem(modal.item._id, cart));
             
