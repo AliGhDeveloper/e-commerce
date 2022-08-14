@@ -32,7 +32,10 @@ const ProductItem = ({ product, setProducts, products }) => {
 
 
     const handleCheck = (product) => {
-        const newArr = [...products, {...product, checked: !product.checked}]
+        const newArr = products.map(item => {
+          if(item._id === product._id) return {...item, checked: !item.checked}
+          return item
+        })
         setProducts(newArr)
         // dispatch(updateItem(products, product._id, {...product, checked: !product.checked}, 'ADD_PRODUCT'));
     };
