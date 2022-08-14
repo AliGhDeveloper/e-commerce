@@ -38,7 +38,7 @@ export const deleteItem = (itemId, array, type) => {
             newArr = newArr.filter(item => item._id !== id )
         })
     } else {
-        newArr = array.filter( item => item._id === itemId)
+        newArr = array.filter( item => item._id !== itemId)
     }
     return { type , payload : newArr}
 }
