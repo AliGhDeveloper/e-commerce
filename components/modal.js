@@ -12,6 +12,7 @@ export default function Modal () {
     const handleClick = () => {
         if(modal){
             const { actionType, item } = modal
+            console.log(modal)
             if( actionType === 'deleteUser') {
                 
                 deleteData(`/users/deleteuser/${modal.item._id}`, modal.auth.access_token)
@@ -20,7 +21,7 @@ export default function Modal () {
                 dispatch(deleteItem(modal.item._id, users, 'ADD_USERS'));
             
             } else if( actionType === 'ADD_CART'){ 
-                console.log(item._id)
+                
                 dispatch(deleteItem(item._id, cart, actionType));
             
             } else if( actionType === 'ADD_CAT' ){

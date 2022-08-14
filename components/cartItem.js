@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { increaseItem, decreaseItem } from 'store/Actiontypes';
+
+
 export default function CartItem({ item }) {
+    
     const cart = useSelector( state => state.cart );
     const dispatch = useDispatch();
     
@@ -22,9 +25,10 @@ export default function CartItem({ item }) {
                     <button onClick={() => dispatch(increaseItem(cart, item._id))}className="btn btn-outlined" disabled={ item.quantity === item.inStock ? true : false}> + </button>
                 </td>
                 <td>
-                    <i  data-toggle="modal" data-target="#exampleModal" onClick={ () => dispatch({ type: 'MODAL', payload: {state: cart, item, actionType: 'ADD_CART' }})} className="text-danger fas fa-trash-alt"></i>
+                    <button data-toggle="modal" data-target="#exampleModal" className="btn" onClick={() => dispatch({type: 'MODAL', payload: { state: cart, item, actionType:"ADD_CART"}})}><i className="text-danger fas fa-trash-alt"></i></button>
                 </td>
             </tr>
+            
         </>
     )
 }
