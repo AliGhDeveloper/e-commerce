@@ -32,7 +32,7 @@ const ProductItem = ({ product, setProducts, products }) => {
 
 
     const handleCheck = (product) => {
-        newArr = [...products, {...product, checked: !product.checked}]
+        const newArr = [...products, {...product, checked: !product.checked}]
         setProducts(newArr)
         // dispatch(updateItem(products, product._id, {...product, checked: !product.checked}, 'ADD_PRODUCT'));
     };
