@@ -11,7 +11,7 @@ import Filter from 'components/filter';
 
 export default function Home({ productsList, more }){
 
-  const products = productsList
+  const [products, setProducts] = useState(productsList)
 
   const { categories, auth } = useSelector( state => state);
   const router   = useRouter();
@@ -107,7 +107,7 @@ export default function Home({ productsList, more }){
       {
         products && 
         products.map( product => {
-          return <ProductItem key={product._id} product={product}/>
+          return <ProductItem key={product._id} setProducts={setProducts} products={products} product={product}/>
         })
       }
     </div>

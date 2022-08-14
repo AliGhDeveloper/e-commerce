@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateItem } from 'store/Actiontypes';
 import { addToCart } from 'store/Actiontypes';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, setProducts, products }) => {
     const { cart, auth, products } = useSelector(state => state)
 
 
@@ -32,7 +32,9 @@ const ProductItem = ({ product }) => {
 
 
     const handleCheck = (product) => {
-        dispatch(updateItem(products, product._id, {...product, checked: !product.checked}, 'ADD_PRODUCT'));
+        newArr = [...products, {...product, checked: !product.checked}]
+        setProducts(newArr)
+        // dispatch(updateItem(products, product._id, {...product, checked: !product.checked}, 'ADD_PRODUCT'));
     };
 
 
