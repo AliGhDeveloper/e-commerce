@@ -3,7 +3,7 @@ import { updateItem } from 'store/Actiontypes';
 import { addToCart } from 'store/Actiontypes';
 
 const ProductItem = ({ product, setProducts, products }) => {
-    const { cart, auth, products } = useSelector(state => state)
+    const { cart, auth } = useSelector(state => state)
 
 
     const dispatch = useDispatch();
