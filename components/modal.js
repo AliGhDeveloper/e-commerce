@@ -20,8 +20,8 @@ export default function Modal () {
                 dispatch(deleteItem(modal.item._id, users, 'ADD_USERS'));
             
             } else if( actionType === 'ADD_CART'){ 
-                
-                dispatch(deleteItem(modal.item._id, cart, actionType));
+                console.log(item._id)
+                dispatch(deleteItem(item._id, cart, actionType));
             
             } else if( actionType === 'ADD_CAT' ){
                 
