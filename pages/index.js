@@ -11,7 +11,9 @@ import Filter from 'components/filter';
 
 export default function Home({ productsList, more }){
 
-  const { categories, auth, products } = useSelector( state => state);
+  const products = productsList
+
+  const { categories, auth } = useSelector( state => state);
   const router   = useRouter();
   
   //defining state for pagination
@@ -25,9 +27,9 @@ export default function Home({ productsList, more }){
   const dispatch = useDispatch();
   
   
-  useEffect(() => {
-    if(productsList) dispatch({ type: 'ADD_PRODUCT', payload: productsList})
-  }, [productsList])
+  // useEffect(() => {
+  //   if(productsList) dispatch({ type: 'ADD_PRODUCT', payload: productsList})
+  // }, [productsList])
 
   
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function Home({ productsList, more }){
   useEffect(() => {
     checkTheCheck()
   }, [products])
+
   const checkTheCheck = () => {
     const arr = products.filter( product => !product.checked)
     if(arr.length > 0){
@@ -92,7 +95,10 @@ export default function Home({ productsList, more }){
     <>
     <div className="container">
       <Filter categories={categories} />
-      <span className="p-2 align-items-center justify-content-center bg-danger"><input type="checkbox" checked={isAllChecked}  onChange={handleCheckAll} /><button className="btn btn-danger" onClick={ handleDeleteAll } style={{padding: '1px 1px'}} data-toggle="modal" data-target="#exampleModal" disabled={disDeleteAll}>delete all</button></span>
+      {
+        auth.user && auth.user.role === 'admin' &&
+        <span className="p-2 align-items-center justify-content-center bg-danger"><input type="checkbox" checked={isAllChecked}  onChange={handleCheckAll} /><button className="btn btn-danger" onClick={ handleDeleteAll } style={{padding: '1px 1px'}} data-toggle="modal" data-target="#exampleModal" disabled={disDeleteAll}>delete all</button></span>
+      }
     </div>
     <div className="products_list">
       {
