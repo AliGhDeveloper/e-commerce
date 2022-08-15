@@ -12,18 +12,17 @@ export default function Modal () {
         if(modal){
             const { actionType, item, state, auth } = modal
             if( actionType === 'ADD_USERS') {
-                if( auth.user._id === item._id ){
-                    dispatch({ type : 'NOTIFY', payload : {error: 'admins cant delete their own account'}});
-                } else if ( !auth.user.root && item.role === 'admin' ) {
-                    dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
-                } else { 
-                    deleteData(`/users/deleteuser/${item._id}`, modal.auth.access_token)
-                        .then( response => response.json() )
-                        .then( result => {
-                            if(result.error) return dispatch({ type: 'NOTIFY' ,payload: result});
-                            dispatch(deleteItem(item._id, users, 'ADD_USERS'));
-                        })
-                }
+                if( auth.user._id === item._id ) return dispatch({ type : 'NOTIFY', payload : {error: 'admins cant delete their own account'}});
+                
+                if( !auth.user.root && item.role === 'admin' ) return dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
+             
+                deleteData(`/users/deleteuser/${item._id}`, modal.auth.access_token)
+                    .then( response => response.json() )
+                    .then( result => {
+                        if(result.error) return dispatch({ type: 'NOTIFY' ,payload: result});
+                        dispatch(deleteItem(item._id, users, 'ADD_USERS'));
+                    })
+            
             } else if( actionType === 'ADD_CART'){ 
                 
                 dispatch(deleteItem(item._id, cart, actionType));
