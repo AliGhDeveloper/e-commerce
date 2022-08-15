@@ -86,7 +86,7 @@ export default function Home({ productsList, more }){
   
   const handleDeleteAll = () => {
     const deletingProducts = products.filter( product => product.checked ).map(product => product._id)
-    dispatch({type: 'MODAL', payload: {state: products, item: [...deletingProducts], actionType: 'ADD_PRODUCT', auth}})
+    dispatch({type: 'MODAL', payload: {state: products, setProducts, item: [...deletingProducts], actionType: 'deleteAllProducts', auth}})
     
   }
 

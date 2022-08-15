@@ -37,13 +37,17 @@ export default function Modal () {
                         modal.setProducts( state.filter(i => item._id !== i._id))
                     })
             
-            } else if( actionType === 'ADD_PRODUCT') { 
+            } else if( actionType === 'deleteAllProducts') { 
                 dispatch({ type: 'NOTIFY', payload: { loading: 'please wait...'}})
                 return deleteData('/products', modal.item, modal.auth.access_token)
                     .then(response => response.json())
                     .then(result => {
                         if(result.error) return dispatch({type: 'NOTIFY', payload: result})
-                        dispatch(deleteItem(item, modal.state, actionType))
+                        let newProducts = [...state];
+                        item.forEach(id => {
+                            newProducts = newProducts.filter( i => i._id !== id)
+                        });
+                        modal.setProducts(newProducts)
                         return dispatch({type: 'NOTIFY', payload: result})
                     })
                 
