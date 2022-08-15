@@ -53,7 +53,7 @@ const Users = () => {
                                     </td>
                                     <td className="action">
                                         <Link href={`/users/edit-user/${user._id}`} ><i className="text-primary fas fa-edit"></i></Link>
-                                        <i  data-toggle="modal" data-target="#exampleModal" onClick={() => handleDelete(user)} className="text-danger fas fa-trash-alt ml-3"></i>
+                                        <i  data-toggle="modal" data-target="#exampleModal" onClick={() => handleDelete(user)} style={{cursor: 'pointer'}} className="text-danger fas fa-trash-alt ml-3"></i>
                                     </td>
                                 </tr>
                             ))

@@ -6,8 +6,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-i.fa-edit,
-i.fa-trash-alt { 
+.fa-edit,
+.fa-trash-alt { 
   cursor: pointer
 }
 
