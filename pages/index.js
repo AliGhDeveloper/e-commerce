@@ -65,7 +65,7 @@ export default function Home({ productsList, more }){
     products.forEach( product => 
       newProducts.push({...product, checked : !isChecked})
     );
-    dispatch({ type: 'ADD_PRODUCT', payload: newProducts });
+    setProducts(newProducts);
     setIschecked(!isChecked)
     setIsAllChecked(!isAllChecked)
   };
