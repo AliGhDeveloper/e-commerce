@@ -9,13 +9,13 @@ const Users = () => {
     if(!auth.user || auth.user && auth.user.role !== 'admin') return null
 
     const handleDelete = (user) => {
-        // if( auth.user._id === user._id ){
-        //     dispatch({ type : 'NOTIFY', payload : {error: 'admins cant delete their own account'}});
-        // } else if ( !auth.user.root && user.role === 'admin' ) {
-        //     dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
-        // } else { 
-            dispatch({ type: 'MODAL', payload: {item: user, actionType: 'deleteUser', auth}});
-        // }
+        if( auth.user._id === user._id ){
+            dispatch({ type : 'NOTIFY', payload : {error: 'admins cant delete their own account'}});
+        } else if ( !auth.user.root && user.role === 'admin' ) {
+            dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
+        } else { 
+            dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}});
+        }
     }
     return (
         <div className="container">

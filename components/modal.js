@@ -11,12 +11,13 @@ export default function Modal () {
     const handleClick = () => {
         if(modal){
             const { actionType, item, state } = modal
-            if( actionType === 'deleteUser') {
-                
-                deleteData(`/users/deleteuser/${modal.item._id}`, modal.auth.access_token)
+            if( actionType === 'ADD_USERS') {
+                deleteData(`/users/deleteuser/${item._id}`, modal.auth.access_token)
                     .then( response => response.json() )
-                    .then( result => console.log(result))
-                dispatch(deleteItem(modal.item._id, users, 'ADD_USERS'));
+                    .then( result => {
+                        if(result.error) return dispatch({ type: 'NOTIFY' ,payload: result});
+                        dispatch(deleteItem(item._id, users, 'ADD_USERS'));
+                    })
             
             } else if( actionType === 'ADD_CART'){ 
                 
