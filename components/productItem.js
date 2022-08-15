@@ -24,7 +24,7 @@ const ProductItem = ({ product, setProducts, products }) => {
         return (
         <>
             <a href={`/create/${product._id}`} className="flex-fill w-100 mx-1 btn btn-primary">Edit</a>
-            <button className=" flex-fill btn w-100 btn-danger mx-1" data-toggle="modal" data-target="#exampleModal" onClick={() => dispatch({type: 'MODAL', payload: { title : product.title, item: product, auth, actionType: 'deleteProduct' }})}>Delete</button>
+            <button className=" flex-fill btn w-100 btn-danger mx-1" data-toggle="modal" data-target="#exampleModal" onClick={() => dispatch({type: 'MODAL', payload: { state:products, title : product.title, item: product, setProducts, auth, actionType: 'deleteProduct' }})}>Delete</button>
         </>
         )
     };

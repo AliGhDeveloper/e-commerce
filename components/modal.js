@@ -1,4 +1,3 @@
-import { productionBrowserSourceMaps } from 'next.config';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem } from 'store/Actiontypes';
 import { deleteData } from 'utils/fetchData';
@@ -11,8 +10,7 @@ export default function Modal () {
 
     const handleClick = () => {
         if(modal){
-            const { actionType, item } = modal
-            console.log(modal)
+            const { actionType, item, state } = modal
             if( actionType === 'deleteUser') {
                 
                 deleteData(`/users/deleteuser/${modal.item._id}`, modal.auth.access_token)
@@ -34,7 +32,10 @@ export default function Modal () {
                 
                 return deleteData( `/products/${item._id}`,null, modal.auth.access_token)
                     .then(response => response.json())
-                    .then(result => console.log(result))
+                    .then(result => {
+                        if(result.error) return dispatch({type: 'NOTIFY', payload: result})
+                        modal.setProducts( state.filter(i => item._id !== i._id))
+                    })
             
             } else if( actionType === 'ADD_PRODUCT') { 
                 dispatch({ type: 'NOTIFY', payload: { loading: 'please wait...'}})
