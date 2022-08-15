@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 
-import filtering from "utils/filtering";
+
 import ProductItem from "components/productItem";
 import Filter from 'components/filter';
+import Pagination from "@/layout/pagination";
 
 
 
@@ -70,19 +71,6 @@ export default function Home({ productsList, more }){
     setIsAllChecked(!isAllChecked)
   };
 
-
-  const handlePagination = (e, option) => {
-    if(option.direc === 'next'){
-      filtering({router, page: page + 1});
-      setPage(page + 1)
-    } else {
-      if(page > 1){
-        setPage(page - 1)
-        filtering({router, page: page - 1});
-      } 
-    }
-  };
-
   
   const handleDeleteAll = () => {
     const deletingProducts = products.filter( product => product.checked ).map(product => product._id)
@@ -102,22 +90,13 @@ export default function Home({ productsList, more }){
     </div>
     <div className="products_list">
       {
-        !products && <h2>there is no product</h2>
-      }
-      {
         products && 
         products.map( product => {
           return <ProductItem key={product._id} setProducts={setProducts} products={products} product={product}/>
         })
       }
     </div>
-    <nav aria-label="Page navigation example" className="d-flex justify-content-end mx-3">
-      <ul className="pagination d-flex flex-row-reverse">
-        <li className={`page-item ${page === 1 && 'disabled'}`}><a className="page-link" href="#" onClick={(e) => handlePagination(e, { direc : 'prev' })}>Previous</a></li>
-        <li className="page-item"><a className="page-link" href="#" >{page}</a></li>
-        <li className={`page-item ${!more && 'disabled'}`}><a  className="page-link" href="#" onClick={(e) => handlePagination(e, { direc : 'next' })} >Next</a></li>
-      </ul>
-    </nav>
+    <Pagination page={page} more={more} setPage={setPage} />
     </>
   )
 };
