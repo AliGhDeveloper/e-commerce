@@ -8,15 +8,6 @@ const Users = () => {
 
     if(!auth.user || auth.user && auth.user.role !== 'admin') return null
 
-    const handleDelete = (user) => {
-        if( auth.user._id === user._id ){
-            dispatch({ type : 'NOTIFY', payload : {error: 'admins cant delete their own account'}});
-        } else if ( !auth.user.root && user.role === 'admin' ) {
-            dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
-        } else { 
-            dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}});
-        }
-    }
     return (
         <div className="container">
             <div className="row my-3 table-responsive">
@@ -53,7 +44,7 @@ const Users = () => {
                                     </td>
                                     <td className="action">
                                         <Link href={`/users/edit-user/${user._id}`} ><i className="text-primary fas fa-edit"></i></Link>
-                                        <button onClick={() => handleDelete(user)} data-toggle="modal" data-target="#exampleModal" className="btn btn-danger ml-3">
+                                        <button onClick={() => dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}})} data-toggle="modal" data-target="#exampleModal" className="btn btn-danger ml-3">
                                             <i className="text-white fas fa-trash-alt"></i>
                                         </button>
                                     </td>
