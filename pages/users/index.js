@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from 'styles/Users.module.css';
+import { useRouter } from 'next/router';
 
 const Users = () => {
     const { auth, users } = useSelector( state => state );
     const dispatch = useDispatch();
-
+    const router = useRouter();
+    
     if(!auth.user || auth.user && auth.user.role !== 'admin') return null
 
     return (
@@ -43,7 +45,7 @@ const Users = () => {
                                         }
                                     </td>
                                     <td className="action">
-                                        <Link href={`/users/edit-user/${user._id}`} ><i className="text-primary fas fa-edit"></i></Link>
+                                        <button className="btn btn-primary" onClick={() => {router.push(`/users/edit-user/${user._id}`)}}><i className="text-white fas fa-edit"></i></button>
                                         <button onClick={() => dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}})} data-toggle="modal" data-target="#exampleModal" className="btn btn-danger ml-3">
                                             <i className="text-white fas fa-trash-alt"></i>
                                         </button>

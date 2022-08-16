@@ -1,5 +1,11 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/users": "pages/users.js",
+  "/api/orders": "pages/api/orders.js",
+  "/api/auth/accessToken": "pages/api/auth/accessToken.js",
+  "/api/users": "pages/api/users.js",
+  "/api/categories": "pages/api/categories.js",
+  "/api/users/deleteuser/[id]": "pages/api/users/deleteuser/[id].js"
 }

@@ -40,9 +40,12 @@ export default function EditUser() {
         }else { 
             setIsAdmin(!isAdmin);
             
-            patchData(`http://localhost:3000/api/users/changerole/${user._id}`, {isAdmin: e.target.checked}, auth.access_token)
+            patchData(`/users/changerole/${user._id}`, {isAdmin: e.target.checked}, auth.access_token)
                 .then( response => response.json())
-                .then( result => { console.log(result) });
+                .then( result => {
+                    if(result.error) return dispatch({type: 'NOTIFY', payload: result})
+                    dispatch({ type: 'NOTIFY', payload: {success: 'user role changed'}})
+                });
 
             dispatch(updateItem(users, user._id, { ...user, role: e.target.checked ? 'admin' : 'user'}, 'ADD_USERS' ))
         } 

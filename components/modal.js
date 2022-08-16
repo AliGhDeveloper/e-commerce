@@ -16,7 +16,7 @@ export default function Modal () {
                 
                 if( !auth.user.root && item.role === 'admin' ) return dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
              
-                deleteData(`/users/deleteuser/${item._id}`, modal.auth.access_token)
+                deleteData(`/users/deleteuser/${item._id}`,null, modal.auth.access_token)
                     .then( response => response.json() )
                     .then( result => {
                         if(result.error) return dispatch({ type: 'NOTIFY' ,payload: result});
