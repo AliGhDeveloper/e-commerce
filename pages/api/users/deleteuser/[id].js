@@ -15,7 +15,8 @@ async function deleteuser(req, res) {
     const { id } = req.query;
 
     const user = await auth(req, res);
-    if(user.role !== 'admin' || !user.root) return res.status(401).json({ error: 'authentication error'})
+    
+    if(!user || user.role !== 'admin') return res.status(401).json({ error: 'authentication error'})
 
     const deletedUser = await Users.findOneAndDelete({ _id : id });
 
