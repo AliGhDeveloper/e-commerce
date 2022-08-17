@@ -4,7 +4,7 @@ import Users from 'models/UsersModel';
 export default async function auth(req, res) {
     const token = req.headers.authorization;
     if(!token) return res.status(401).json( { error: "unAthenticated user!" } );
-    console.log(token)
+    
     try { 
         const verify = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         if(!verify) return res.status(401).json( { error: "invalid Token!"})

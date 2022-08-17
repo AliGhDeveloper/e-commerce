@@ -15,14 +15,18 @@ const Categories = () => {
         if( auth.user && auth.user.role !== 'admin' ) return dispatch( { type: 'NOTIFY', payload: {error: 'Only admins can add/update categories'}});
         
         if(id) { 
-            putData(`http://localhost:3000/api/categories/modify/${id}`, { name }, auth.access_token)
+            if(!name) return dispatch({type: 'NOTIFY', payload: {error: 'enter the category name!'}})
+
+            putData(`/categories/modify/${id}`, { name }, auth.access_token)
             .then( response => response.json())
             .then( result => {
                 if(result.error) return dispatch( { type: 'NOTIFY', payload: result});
                 dispatch(updateItem(categories, id, {...result, name}, 'ADD_CAT'))
             })
         } else {
-            postData('http://localhost:3000/api/categories', { name }, auth.access_token)
+            if(!name) return dispatch({type: 'NOTIFY', payload: {error: 'enter the category name!'}})
+            
+            postData('/categories', { name }, auth.access_token)
                 .then( response => response.json())
                 .then( result => {
                     if(result.error) return dispatch( { type: 'NOTIFY', payload: result});
@@ -56,8 +60,12 @@ const Categories = () => {
                             <div className="card-body d-flex justify-content-between">
                                 <span>{category.name}</span>
                                 <div>
-                                    <i className="text-primary fas fa-edit" onClick={() => { setId(category._id); setName(category.name) }}></i>
-                                    <i  data-toggle="modal" data-target="#exampleModal" onClick={() => dispatch({ type: 'MODAL', payload: {title : category.name, state: categories, item: category, actionType: 'ADD_CAT', auth }})}  className="text-danger fas fa-trash-alt ml-3"></i>
+                                    <button  onClick={() => { setId(category._id); setName(category.name); catInp.current.focus() }} className="btn btn-primary">
+                                    <i className="text-white fas fa-edit"></i>
+                                    </button>
+                                    <button data-toggle="modal" data-target="#exampleModal" onClick={() => dispatch({ type: 'MODAL', payload: {title : category.name, state: categories, item: category, actionType: 'ADD_CAT', auth }})} className="btn btn-danger ml-3">
+                                    <i className="text-white fas fa-trash-alt"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +73,7 @@ const Categories = () => {
                 }
             </div>
             <div className="row my-3 d-flex justify-content-center align-items-center">
-                <i className="btn btn-success fas fa-plus" onClick={addCat}></i>
+                <button className="btn btn-success"onClick={addCat}><i className="text-white fas fa-plus" ></i></button>
             </div>  
         </div>
     )
