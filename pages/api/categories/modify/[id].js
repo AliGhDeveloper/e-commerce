@@ -1,4 +1,5 @@
 import Categories from 'models/CategoriesModel';
+import Products from 'models/ProductsModel';
 import { Db_connect } from 'utils/Db_connection';
 import auth from 'middlewares/auth';
 
@@ -34,7 +35,12 @@ async function deleteCat(req ,res) {
         const user = await auth(req, res);
         if( user.role !== 'admin' ) return res.status(401).json({ error: 'authentication error'});
 
+        const products = await Products.find({ category: id })
+        if(products.length > 0) return res.status(400).json({error: 'please delete all related products first then try again!'})
+
         await Categories.findOneAndDelete({ _id : id });
+
+        return res.status(200).json({success: 'category deleted successfully'})
 
     } catch( error ) {
         console.log({ error : error.message })

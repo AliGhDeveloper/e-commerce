@@ -4,7 +4,7 @@ import { deleteData } from 'utils/fetchData';
 
 export default function Modal () {
 
-    const {modal, cart, users, products} = useSelector( state => state )
+    const {modal, cart, users} = useSelector( state => state )
     const dispatch = useDispatch();
 
 
@@ -16,7 +16,7 @@ export default function Modal () {
                 
                 if( !auth.user.root && item.role === 'admin' ) return dispatch({ type : 'NOTIFY', payload : {error: "only roots can delete admin's accounts"}});
              
-                deleteData(`/users/deleteuser/${item._id}`,null, modal.auth.access_token)
+                deleteData(`/users/deleteuser/${item._id}`,null, auth.access_token)
                     .then( response => response.json() )
                     .then( result => {
                         if(result.error) return dispatch({ type: 'NOTIFY' ,payload: result});
@@ -29,13 +29,16 @@ export default function Modal () {
             
             } else if( actionType === 'ADD_CAT' ){
                 
-                deleteData(`/categories/modify/${modal.item._id}`, modal.auth.access_token)
-                    .then( response => response.json())
-                    .then( result => console.log(result))
+                return deleteData(`/categories/modify/${item._id}`,null, auth.access_token)
+                        .then( response => response.json())
+                        .then( result => {
+                            dispatch({ type: 'NOTIFY', payload: result})
+                            if(!result.error) dispatch(deleteItem(item._id, state,  actionType));
+                        })
             
             } else if( actionType === 'deleteProduct') {
                 
-                return deleteData( `/products/${item._id}`,null, modal.auth.access_token)
+                return deleteData( `/products/${item._id}`,null, auth.access_token)
                     .then(response => response.json())
                     .then(result => {
                         if(result.error) return dispatch({type: 'NOTIFY', payload: result})
@@ -44,7 +47,7 @@ export default function Modal () {
             
             } else if( actionType === 'deleteAllProducts') { 
                 dispatch({ type: 'NOTIFY', payload: { loading: 'please wait...'}})
-                return deleteData('/products', modal.item, modal.auth.access_token)
+                return deleteData('/products', item, auth.access_token)
                     .then(response => response.json())
                     .then(result => {
                         if(result.error) return dispatch({type: 'NOTIFY', payload: result})
@@ -55,11 +58,9 @@ export default function Modal () {
                         modal.setProducts(newProducts)
                         return dispatch({type: 'NOTIFY', payload: result})
                     })
-                
-                return 
             }
+            dispatch(deleteItem(item._id, state,  actionType));
         }
-        dispatch(deleteItem(modal.item._id, modal.state,  modal.actionType));
         handleModalClose();
     }
 
