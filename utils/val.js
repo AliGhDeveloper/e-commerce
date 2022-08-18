@@ -5,12 +5,7 @@ export const val = (email, password, cf_password) => {
     if(!validateEmail(email)){
         return "email is invalid"
     }
-    if(password.length < 6){
-        return "password must be at least 6 characters"
-    }
-    if(password !== cf_password){
-        return "passwords are not the same"
-    }
+    passswordVal(password, cf_password)
 };
 
 const validateEmail = (email) => {
@@ -41,3 +36,12 @@ export const shippingVal = (address, email, telephone) => {
         return "email is invalid"
     }
 };
+
+export const passswordVal = (password, cf_password) => {
+    if(password.length < 6){
+        return "password must be at least 6 characters"
+    }
+    if(password !== cf_password){
+        return "password and confirm password must be the same!"
+    }
+}
