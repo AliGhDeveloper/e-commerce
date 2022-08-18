@@ -2,10 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/auth/accessToken": "pages/api/auth/accessToken.js",
-  "/categories": "pages/categories.js",
-  "/api/orders": "pages/api/orders.js",
-  "/api/users": "pages/api/users.js",
-  "/api/categories/modify/[id]": "pages/api/categories/modify/[id].js",
-  "/api/categories": "pages/api/categories.js"
+  "/api/profile/changepass": "pages/api/profile/changepass.js",
+  "/": "pages/index.js",
+  "/api/products": "pages/api/products.js"
 }
