@@ -80,7 +80,7 @@ export default function Cart(){
     //handle shipping
     const handleSubmit = async () => {
         if(!auth.user) { 
-            router.push('/signin');
+            return router.push('/signin');
         }
         const errorMessage = shippingVal(address, email, telephone);
         if(errorMessage) return dispatch({ type: 'NOTIFY', payload: {error: errorMessage } })

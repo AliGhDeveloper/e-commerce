@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { getData } from "utils/fetchData";
 import styles from 'styles/DetailsProduct.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "store/Actiontypes";
 
 
 export default function ProductDetail( { product } ) {
+    const cart = useSelector( state => state.cart);
     const [ tab, setTab ] = useState(0);
+    const dispatch = useDispatch();
+
 
     const isActive = (index) => {
         if( index === tab ){
@@ -34,7 +39,7 @@ export default function ProductDetail( { product } ) {
                 <div style={{}} className="col-md-6">
                     <h5 className="text-capitalize ">{product.title}</h5>
                     <p>{product.content}</p>
-                    <button className="btn btn-secondary">Buy Now</button>
+                    <button className="btn btn-secondary" onClick={() => dispatch(addToCart(product, cart))}>Buy Now</button>
                 </div>
             </div>
         </div>
@@ -43,7 +48,7 @@ export default function ProductDetail( { product } ) {
 
 export async function getServerSideProps(context) {
     const { params } = context;
-    const response = await getData(`http://localhost:3000/api/products/${params.id}`);
+    const response = await getData(`/products/${params.id}`);
     const data = await response.json();
     return {
         props : {

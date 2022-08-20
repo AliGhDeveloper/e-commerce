@@ -3,6 +3,7 @@ import { patchData } from "utils/fetchData";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { updateItem } from "store/Actiontypes";
+import { ADD_ORDERS } from "store/Actions";
 
 export default function OrderDetails() {
     const { orders, auth } = useSelector(state => state);
@@ -47,9 +48,9 @@ export default function OrderDetails() {
 
         dispatch({ type : "NOTIFY", payload: { success : "order updated"}});
         if(orderDetails.paid) { 
-            dispatch(updateItem(orders, orderDetails._id, {...orderDetails, delivered: true} ))
+            dispatch(updateItem(orders, orderDetails._id, {...orderDetails, delivered: true}, 'ADD_ORDERS' ))
         } else {
-            dispatch(updateItem(orders, orderDetails._id, {...orderDetails, paid: true, paidAt: result.data.paidAt, delivered: true, method: result.data.method} ))
+            dispatch(updateItem(orders, orderDetails._id, {...orderDetails, paid: true, paidAt: result.data.paidAt, delivered: true, method: result.data.method}, 'ADD_ORDERS' ))
         }
     }
     return (
