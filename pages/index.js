@@ -13,6 +13,9 @@ import Pagination from "@/layout/pagination";
 export default function Home({ productsList, more }){
 
   const [products, setProducts] = useState(productsList)
+  useEffect(() => {
+    setProducts(productsList)
+  }, [productsList])
 
   const { categories, auth } = useSelector( state => state);
   const router   = useRouter();

@@ -44,7 +44,7 @@ export default function Register(){
         const ErrorMessage = val(email, password, cf_password)
         if(ErrorMessage) return dispatch( { type: "NOTIFY" , payload : { error : ErrorMessage}})
         dispatch({ type : 'NOTIFY', payload : { loading : "please wait.."} });
-        const res = await postData('/api/register', userData);
+        const res = await postData('/register', userData);
         const data = await res.json();
         return dispatch( { type : 'NOTIFY', payload : data })
     }   
