@@ -56,6 +56,7 @@ class FeaturesAPI {
 }
 
 async function getProducts( req, res ) {
+   
     const feature = new FeaturesAPI(Products.find(), req.query).pagination().filtering().sorting();
     try {
         const products = await feature.query
