@@ -2,16 +2,43 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from 'styles/Users.module.css';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getData } from 'utils/fetchData';
 
 const Users = () => {
-    const { auth, users } = useSelector( state => state );
+    const [more, setMore] = useState(false)
+    const [page, setPage] = useState(1)
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userid, setUserid] = useState(null)
+    const { auth } = useSelector( state => state );
+    const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
     const router = useRouter();
     
-    if(!auth.user || auth.user && auth.user.role !== 'admin') return null
-
+    useEffect(() => {
+        if(auth.user && auth.user.role ==='admin') {
+            getData(`/users?limit=${4}&search=${userid ? userid : 'all'}&isadmin=${isAdmin}&page=${page}`, auth.access_token)
+                .then( response => response.json())
+                .then( result => {
+                    if( result.error ) return console.log(result)
+                    setUsers([...users, ...result.data])
+                    setMore(result.more)
+                })
+        }
+    }, [auth, userid, isAdmin, page])
+    
+    if(!auth.user || auth.user && auth.user.role !== 'admin' ) return <h1>Access Denied</h1>
+    if(users.length < 0) return <h1>No user to show</h1>
+    
     return (
         <div className="container">
+            <form className="form d-flex justify-content-around my-2 align-items-center">
+                <input type="text" className="form-control w-50" placeholder="User id..."/>
+                <div className="form-group mb-0">
+                    <input type="checkbox" id="admincheck" className="form-input-check" />
+                    <label className=" mb-0" htmlFor="admincheck">Admin</label>
+                </div>
+            </form>
             <div className="row my-3 table-responsive">
                 <table className={`table-bordered w-100 ${styles.users_table}`}>
                     <thead>
@@ -55,6 +82,12 @@ const Users = () => {
                         }
                     </tbody>
                 </table>
+                {
+                    more && 
+                    <div className="d-flex justify-content-center my-3">
+                        <button onClick={() => setPage(page + 1)} className="btn btn-secondary ">Load more..</button>
+                    </div>
+                }
             </div>
         </div>
     )
