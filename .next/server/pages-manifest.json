@@ -2,9 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/cart": "pages/cart.js",
   "/api/auth/accessToken": "pages/api/auth/accessToken.js",
   "/api/categories": "pages/api/categories.js",
-  "/api/users": "pages/api/users.js",
   "/api/orders": "pages/api/orders.js",
-  "/users": "pages/users.js"
+  "/api/users": "pages/api/users.js",
+  "/profile": "pages/profile.js",
+  "/profile/orders/[id]": "pages/profile/orders/[id].js"
 }

@@ -17,28 +17,34 @@ export default function Filter({ categories }){
         filtering({router, category: e.target.value})
     };
     return (
-        <div className="filter my-2 d-flex">
-            <div className="input-group w-25">
-                <div className="input-group-prepend" >
-                    <span className="input-group-text">categroy</span>
+        <div className="filter my-2 row">
+            <div className="col-sm-3">
+                <div className="input-group">
+                    <div className="input-group-prepend" >
+                        <span className="input-group-text">categroy</span>
+                    </div>
+                    <select value={category} className="custom-select" onChange={handleCategory}>
+                        <option value="all">All Products</option>
+                        {
+                            categories.map(cat => (
+                                <option key={cat._id} value={cat._id} >{cat.name}</option>
+                            ))
+                        }
+                    </select>
                 </div>
-                <select value={category} className="form-control" onChange={handleCategory}>
-                    <option value="all">All Products</option>
-                    {
-                        categories.map(cat => (
-                            <option key={cat._id} value={cat._id} >{cat.name}</option>
-                        ))
-                    }
-                </select>
             </div>
-            <input type="text" placeholder="search..." name="title" className="form-control w-50" onChange={(e) => setSearch(e.target.value)}/>
-            <select className="form-control w-25" onChange={(e) => {filtering({router, sort: e.target.value})}}>
-                <option value="-createdAt">newest</option>
-                <option value="oldest">oldest</option>
-                <option value="-sold">best sell</option>
-                <option value="price">price low-high</option>
-                <option value="-price">price high-low</option>
-            </select>  
+            <div className="col-sm-6">
+                <input type="text" placeholder="search..." name="title" className="form-control" onChange={(e) => setSearch(e.target.value)}/>
+            </div>
+            <div className="col-sm-3">
+                <select className="form-control" onChange={(e) => {filtering({router, sort: e.target.value})}}>
+                    <option value="-createdAt">newest</option>
+                    <option value="oldest">oldest</option>
+                    <option value="-sold">best sell</option>
+                    <option value="price">price low-high</option>
+                    <option value="-price">price high-low</option>
+                </select>  
+            </div>
         </div>
     )
 };

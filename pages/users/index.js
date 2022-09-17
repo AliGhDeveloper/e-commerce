@@ -21,7 +21,7 @@ const Users = () => {
                 .then( response => response.json())
                 .then( result => {
                     if( result.error ) return console.log(result)
-                    setUsers([...users, ...result.data])
+                    setUsers([...result.data])
                     setMore(result.more)
                 })
         }
@@ -33,13 +33,13 @@ const Users = () => {
     return (
         <div className="container">
             <form className="form d-flex justify-content-around my-2 align-items-center">
-                <input type="text" className="form-control w-50" placeholder="User id..."/>
+                <input type="text" className="form-control w-50" placeholder="User id..." onChange={(e) => setUserid(e.target.value)}/>
                 <div className="form-group mb-0">
-                    <input type="checkbox" id="admincheck" className="form-input-check" />
+                    <input type="checkbox" id="admincheck" checked={isAdmin} onChange={(e) => {setIsAdmin(e.target.checked); setPage(1)}} className="form-input-check" />
                     <label className=" mb-0" htmlFor="admincheck">Admin</label>
                 </div>
             </form>
-            <div className="row my-3 table-responsive">
+            <div className="row my-3 table-responsive p-3">
                 <table className={`table-bordered w-100 ${styles.users_table}`}>
                     <thead>
                         <tr>
@@ -72,22 +72,22 @@ const Users = () => {
                                         }
                                     </td>
                                     <td className="action">
-                                        <button className="btn btn-primary" onClick={() => {router.push(`/users/edit-user/${user._id}`)}}><i className="text-white fas fa-edit"></i></button>
-                                        <button onClick={() => dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}})} data-toggle="modal" data-target="#exampleModal" className="btn btn-danger ml-3">
-                                            <i className="text-white fas fa-trash-alt"></i>
-                                        </button>
+                                        <div className="d-flex justify-content-center">
+                                            <button className="btn btn-sm btn-primary" onClick={() => {router.push(`/users/edit-user/${user._id}`)}}><i className="text-white fas fa-edit"></i></button>
+                                            <button onClick={() => dispatch({ type: 'MODAL', payload: {state: users, item: user, actionType: 'ADD_USERS', auth}})} data-toggle="modal" data-target="#exampleModal" className="btn btn-sm btn-danger ml-3">
+                                                <i className="text-white fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
                         }
                     </tbody>
                 </table>
-                {
-                    more && 
-                    <div className="d-flex justify-content-center my-3">
-                        <button onClick={() => setPage(page + 1)} className="btn btn-secondary ">Load more..</button>
-                    </div>
-                }
+                <div className="d-flex justify-content-between my-3">
+                    <button onClick={() => setPage(page - 1)} disabled={page === 1} className="btn btn-secondary">go back</button>
+                    <button onClick={() => setPage(page + 1)} disabled={!more} className="btn btn-secondary ">Load more..</button>
+                </div>
             </div>
         </div>
     )

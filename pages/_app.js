@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Navbar from '@/layout/navbar';
-import Footer from '@/layout/footer';
 import Notify from '../components/notify';
 import StartUp from 'components/startup';
 import { DataProvider } from '../store/GlobalState';
@@ -26,7 +25,6 @@ function MyApp({ Component, pageProps }) {
           <Notify />
           <Modal />
           <Component {...pageProps} />
-          <Footer />
         </StartUp>
       </DataProvider>
     </>
